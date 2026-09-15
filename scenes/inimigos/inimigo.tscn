@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b2rjrfk1is6ig"]
+
+[ext_resource type="Script" uid="uid://deyeu6ws1bpqq" path="res://scenes/inimigos/inimigo.gd" id="1_k84cy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+
+[node name="Inimigo" type="CharacterBody2D" unique_id=1630334304]
+script = ExtResource("1_k84cy")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=21109761]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1933598987]
+shape = SubResource("CircleShape2D_g4v7s")
