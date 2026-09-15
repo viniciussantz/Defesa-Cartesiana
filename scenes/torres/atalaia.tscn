@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cm05pmx2elkpm"]
+
+[ext_resource type="Script" uid="uid://cvmol4m8y8k3v" path="res://scenes/torres/atalaia.gd" id="1_ip46u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+
+[node name="Atalaia" type="Node2D" unique_id=1537692507]
+script = ExtResource("1_ip46u")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1430001295]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=658305362]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="Timer" type="Timer" parent="." unique_id=672358190]
+
+[node name="Visual" type="ColorRect" parent="." unique_id=1442034131]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(0.5372549, 0.31764707, 0.16078432, 1)
