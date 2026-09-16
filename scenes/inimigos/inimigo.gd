@@ -1,15 +1,15 @@
-extends CharacterBody2D
+extends CharacterBody3D
 
-# Vida total do inimigo
 @export var vida_maxima: int = 30
 var vida_atual: int
 
-# Velocidade de movimento (pixels por segundo)
-@export var velocidade: float = 60.0
+@export var velocidade: float = 3.0
 
-# Lista de pontos (Vector2) que o inimigo vai seguir, na ordem
 var caminho: Array = []
 var indice_caminho_atual: int = 0
+
+# Gravidade, para manter o inimigo "grudado" no chão em 3D
+var gravidade: float = 9.8
 
 
 func _ready() -> void:
@@ -18,20 +18,24 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# _physics_process roda a cada "frame físico" — é aqui que movimento
-	# e colisão devem ser calculados, ao contrário de _process (usado para
-	# coisas que não envolvem física).
+	if not is_on_floor():
+		velocity.y -= gravidade * delta
 
 	if indice_caminho_atual >= caminho.size():
-		return  # chegou ao fim do caminho, não faz nada
+		move_and_slide()
+		return
 
-	var destino: Vector2 = caminho[indice_caminho_atual]
-	var direcao: Vector2 = (destino - global_position).normalized()
+	var destino: Vector3 = caminho[indice_caminho_atual]
+	var direcao: Vector3 = (destino - global_position)
+	direcao.y = 0.0  # ignora diferença de altura no cálculo de direção
+	direcao = direcao.normalized()
 
-	velocity = direcao * velocidade
+	velocity.x = direcao.x * velocidade
+	velocity.z = direcao.z * velocidade
+
 	move_and_slide()
 
-	if global_position.distance_to(destino) < 4.0:
+	if global_position.distance_to(destino) < 0.2:
 		indice_caminho_atual += 1
 
 

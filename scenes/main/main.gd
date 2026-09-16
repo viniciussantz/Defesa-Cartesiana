@@ -1,29 +1,26 @@
-extends Node2D
+extends Node3D
 
-# Isso carrega a cena da torre, para podermos criar cópias dela em tempo real
 const CENA_ATALAIA = preload("res://scenes/torres/atalaia.tscn")
 
-# Tamanho de cada célula da grade, em pixels
-@export var tamanho_celula: int = 64
+@export var tamanho_celula: float = 2.0
 
 
 func _ready() -> void:
-	$BotaoConstruir.pressed.connect(_on_botao_construir_pressed)
+	$CanvasLayer/BotaoConstruir.pressed.connect(_on_botao_construir_pressed)
 
 
 func _on_botao_construir_pressed() -> void:
-	var x: int = int($InputX.text)
-	var y: int = int($InputY.text)
+	var x: int = int($CanvasLayer/InputX.text)
+	var z: int = int($CanvasLayer/InputY.text)
 
-	var posicao_mundo: Vector2 = grade_para_mundo(x, y)
+	var posicao_mundo: Vector3 = grade_para_mundo(x, z)
 
 	var nova_torre = CENA_ATALAIA.instantiate()
 	nova_torre.position = posicao_mundo
-	$Torres.add_child(nova_torre)
+	$Torres.add_child(nova_torre, true)
 
 
-func grade_para_mundo(x: int, y: int) -> Vector2:
-	# Converte uma coordenada de grade (ex: 3, 5) em uma posição real
-	# de tela/mundo em pixels. Esse é o requisito de "conversão de
-	# coordenadas" que vocês mencionaram na proposta.
-	return Vector2(x * tamanho_celula, y * tamanho_celula)
+func grade_para_mundo(x: int, z: int) -> Vector3:
+	# Converte coordenada de grade (x, z) em posição real no mundo 3D.
+	# Y fica fixo em 0 porque as torres ficam sempre no chão.
+	return Vector3(x * tamanho_celula, 0.0, z * tamanho_celula)
