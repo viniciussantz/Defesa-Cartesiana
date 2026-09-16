@@ -26,6 +26,9 @@ func _on_body_exited(body: Node3D) -> void:
 
 
 func _on_timer_timeout() -> void:
+	# Remove inimigos que já foram destruídos do array
+	inimigos_no_alcance = inimigos_no_alcance.filter(func(ini): return is_instance_valid(ini))
+	
 	if inimigos_no_alcance.size() > 0:
 		var alvo = inimigos_no_alcance[0]
 		atacar(alvo)

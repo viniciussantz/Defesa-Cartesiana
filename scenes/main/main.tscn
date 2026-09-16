@@ -2,12 +2,21 @@
 
 [ext_resource type="Script" uid="uid://bgmxjggk8ncoa" path="res://scenes/main/main.gd" id="1_hyk8p"]
 [ext_resource type="PackedScene" uid="uid://b2rjrfk1is6ig" path="res://scenes/inimigos/inimigo.tscn" id="2_iuonh"]
+[ext_resource type="Shader" uid="uid://l7quo08foqun" path="res://shaders/grid_cartesiano.gdshader" id="2_l3cfh"]
+[ext_resource type="Script" uid="uid://c7iyf62paqy0p" path="res://scripts/camera_rts.gd" id="3_k2fmo"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
-size = Vector2(20, 20)
+size = Vector2(62, 62)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
-albedo_color = Color(0, 1, 0, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3cfh"]
+render_priority = 0
+shader = ExtResource("2_l3cfh")
+shader_parameter/exibir_grid = true
+shader_parameter/tamanho_celula = 2.0
+shader_parameter/cor_fundo = Color(0.18, 0.24, 0.15, 1)
+shader_parameter/cor_grade = Color(0.7, 0.7, 0.7, 0.3)
+shader_parameter/cor_eixo_x = Color(0.9, 0.2, 0.2, 1)
+shader_parameter/cor_eixo_z = Color(0.2, 0.6, 0.9, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
 size = Vector3(20, 0.1, 20)
@@ -17,10 +26,6 @@ script = ExtResource("1_hyk8p")
 
 [node name="Sol" type="DirectionalLight3D" parent="." unique_id=859875625]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
-
-[node name="CameraPrincipal" type="Camera3D" parent="." unique_id=1692571749]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 15, 0)
-current = true
 
 [node name="Torres" type="Node3D" parent="." unique_id=1621792077]
 
@@ -45,13 +50,20 @@ offset_right = 420.0
 offset_bottom = 60.0
 text = "Posicionar"
 
-[node name="Chao" type="MeshInstance3D" parent="." unique_id=472142663]
+[node name="ChaoGrid" type="MeshInstance3D" parent="." unique_id=472142663]
 mesh = SubResource("PlaneMesh_g4v7s")
-surface_material_override/0 = SubResource("StandardMaterial3D_yf5fn")
+surface_material_override/0 = SubResource("ShaderMaterial_l3cfh")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Chao" unique_id=1476428418]
+[node name="StaticBody3D" type="StaticBody3D" parent="ChaoGrid" unique_id=1476428418]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Chao/StaticBody3D" unique_id=1510812623]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ChaoGrid/StaticBody3D" unique_id=1510812623]
 shape = SubResource("BoxShape3D_g4v7s")
 
 [node name="Inimigo" parent="." unique_id=246776501 instance=ExtResource("2_iuonh")]
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1030766222]
+script = ExtResource("3_k2fmo")
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=338294699]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 15, 15)
+current = true
