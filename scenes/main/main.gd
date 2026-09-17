@@ -58,6 +58,8 @@ func gerar_marcadores_cartesiano() -> void:
 		label_z.position = Vector3(0.5, 0.1, i * tamanho_celula)
 		label_z.rotation_degrees.x = -90
 		container_marcadores.add_child(label_z)
+		
+var primeira_torre_colocada := false
 
 func _on_botao_construir_pressed() -> void:
 	var x: int = int($CanvasLayer/InputX.text)
@@ -68,6 +70,10 @@ func _on_botao_construir_pressed() -> void:
 	var nova_torre = CENA_ATALAIA.instantiate()
 	nova_torre.position = posicao_mundo
 	$Torres.add_child(nova_torre, true)
+	
+	if not primeira_torre_colocada:
+		primeira_torre_colocada = true
+		$Horda.iniciar_horda()
 
 
 func grade_para_mundo(x: int, z: int) -> Vector3:

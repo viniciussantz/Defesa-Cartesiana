@@ -6,7 +6,7 @@ var vida_atual: int
 @export var velocidade: float = 3.0
 
 var caminho: Array = []
-var indice_caminho_atual: int = 0
+var indice_caminho_atual: int = 1
 
 # Gravidade, para manter o inimigo "grudado" no chão em 3D
 var gravidade: float = 9.8
@@ -22,6 +22,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= gravidade * delta
 
 	if indice_caminho_atual >= caminho.size():
+		velocity.x = 0.0
+		velocity.z = 0.0
 		move_and_slide()
 		return
 
@@ -35,7 +37,9 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	if global_position.distance_to(destino) < 0.2:
+	var pos_plana := Vector2(global_position.x, global_position.z)
+	var destino_plano := Vector2(destino.x, destino.z)
+	if pos_plana.distance_to(destino_plano) < 0.6:
 		indice_caminho_atual += 1
 
 

@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://b2rjrfk1is6ig" path="res://scenes/inimigos/inimigo.tscn" id="2_iuonh"]
 [ext_resource type="Shader" uid="uid://l7quo08foqun" path="res://shaders/grid_cartesiano.gdshader" id="2_l3cfh"]
 [ext_resource type="Script" uid="uid://c7iyf62paqy0p" path="res://scripts/camera_rts.gd" id="3_k2fmo"]
+[ext_resource type="Script" uid="uid://csfmecj7r7gnn" path="res://scenes/main/path_3d.gd" id="5_6q06x"]
+[ext_resource type="Script" uid="uid://b7mohkv0yubvs" path="res://scenes/main/node_3d.gd" id="6_ow5a4"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
 size = Vector2(62, 62)
@@ -19,7 +21,9 @@ shader_parameter/cor_eixo_x = Color(0.9, 0.2, 0.2, 1)
 shader_parameter/cor_eixo_z = Color(0.2, 0.6, 0.9, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
-size = Vector3(20, 0.1, 20)
+size = Vector3(60, 0.1, 60)
+
+[sub_resource type="Curve3D" id="Curve3D_ow5a4"]
 
 [node name="Main" type="Node3D" unique_id=725019499]
 script = ExtResource("1_hyk8p")
@@ -58,8 +62,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_l3cfh")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ChaoGrid/StaticBody3D" unique_id=1510812623]
 shape = SubResource("BoxShape3D_g4v7s")
-
-[node name="Inimigo" parent="." unique_id=246776501 instance=ExtResource("2_iuonh")]
+debug_color = Color(0.46030444, 0.5936639, 0, 0.41960785)
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1030766222]
 script = ExtResource("3_k2fmo")
@@ -67,3 +70,12 @@ script = ExtResource("3_k2fmo")
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=338294699]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 15, 15)
 current = true
+
+[node name="Caminho" type="Path3D" parent="." unique_id=1551707060]
+curve = SubResource("Curve3D_ow5a4")
+script = ExtResource("5_6q06x")
+
+[node name="Horda" type="Node3D" parent="." unique_id=1047319805 node_paths=PackedStringArray("path_do_caminho")]
+script = ExtResource("6_ow5a4")
+cena_inimigo = ExtResource("2_iuonh")
+path_do_caminho = NodePath("../Caminho")
