@@ -1,20 +1,14 @@
 [gd_scene format=3 uid="uid://b2rjrfk1is6ig"]
 
 [ext_resource type="Script" uid="uid://4elxicy2sc40" path="res://scenes/inimigos/inimigo.gd" id="1_k84cy"]
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
-albedo_color = Color(1, 0, 0, 1)
+[ext_resource type="PackedScene" uid="uid://b5upt831vwu3w" path="res://assets/models/inimigos/Inimigo.gltf" id="2_d4qpj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
 [node name="Inimigo" type="CharacterBody3D" unique_id=246776501]
 script = ExtResource("1_k84cy")
 
-[node name="Visual" type="MeshInstance3D" parent="." unique_id=1275051865]
-mesh = SubResource("CapsuleMesh_g4v7s")
-surface_material_override/0 = SubResource("StandardMaterial3D_yf5fn")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=178321152]
 shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="blockbench_export" parent="." unique_id=1335046220 instance=ExtResource("2_d4qpj")]

@@ -15,6 +15,8 @@ var gravidade: float = 9.8
 func _ready() -> void:
 	vida_atual = vida_maxima
 	add_to_group("inimigos")
+	$blockbench_export/AnimationPlayer.play("andar")
+	$blockbench_export/AnimationPlayer.get_animation("andar").loop_mode = Animation.LOOP_LINEAR
 
 
 func _physics_process(delta: float) -> void:
@@ -29,11 +31,16 @@ func _physics_process(delta: float) -> void:
 
 	var destino: Vector3 = caminho[indice_caminho_atual]
 	var direcao: Vector3 = (destino - global_position)
-	direcao.y = 0.0  # ignora diferença de altura no cálculo de direção
+	direcao.y = 0.0
 	direcao = direcao.normalized()
 
 	velocity.x = direcao.x * velocidade
 	velocity.z = direcao.z * velocidade
+
+	# Gira o personagem para encarar a direção do movimento
+	if direcao.length() > 0.01:
+		var alvo_look: Vector3 = global_position + direcao
+		look_at(alvo_look, Vector3.UP)
 
 	move_and_slide()
 
