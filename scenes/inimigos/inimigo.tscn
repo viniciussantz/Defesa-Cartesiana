@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://4elxicy2sc40" path="res://scenes/inimigos/inimigo.gd" id="1_k84cy"]
 [ext_resource type="PackedScene" uid="uid://b5upt831vwu3w" path="res://assets/models/inimigos/Inimigo.gltf" id="2_d4qpj"]
+[ext_resource type="AudioStream" uid="uid://db10cpwr8dfbe" path="res://assets/audio/sfx/inimigo/797850__randbsoundbites__character-damage-and-other-physical-exertion.wav" id="3_46738"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
 
@@ -12,3 +13,6 @@ script = ExtResource("1_k84cy")
 shape = SubResource("CapsuleShape3D_g4v7s")
 
 [node name="blockbench_export" parent="." unique_id=1335046220 instance=ExtResource("2_d4qpj")]
+
+[node name="SomDano" type="AudioStreamPlayer3D" parent="." unique_id=471144118]
+stream = ExtResource("3_46738")

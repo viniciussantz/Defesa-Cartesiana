@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://c7iyf62paqy0p" path="res://scripts/camera_rts.gd" id="3_k2fmo"]
 [ext_resource type="Script" uid="uid://csfmecj7r7gnn" path="res://scenes/main/path_3d.gd" id="5_6q06x"]
 [ext_resource type="Script" uid="uid://b7mohkv0yubvs" path="res://scenes/main/node_3d.gd" id="6_ow5a4"]
+[ext_resource type="AudioStream" uid="uid://2cmt55ah2ef3" path="res://assets/audio/musica/Karibu Watu Wangu.ogg" id="7_yyfjg"]
+[ext_resource type="AudioStream" uid="uid://brjemo5d3o6ia" path="res://assets/audio/musica/ritual-norm_0.ogg" id="8_b1x3f"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
 size = Vector2(62, 62)
@@ -79,3 +81,9 @@ script = ExtResource("5_6q06x")
 script = ExtResource("6_ow5a4")
 cena_inimigo = ExtResource("2_iuonh")
 path_do_caminho = NodePath("../Caminho")
+
+[node name="TrilhaConstrucao" type="AudioStreamPlayer" parent="." unique_id=1080552611]
+stream = ExtResource("7_yyfjg")
+
+[node name="TrilhaHorda" type="AudioStreamPlayer" parent="." unique_id=933615036]
+stream = ExtResource("8_b1x3f")

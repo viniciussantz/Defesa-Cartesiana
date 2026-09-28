@@ -37,3 +37,7 @@ func _on_timer_timeout() -> void:
 func atacar(inimigo: Node3D) -> void:
 	if inimigo.has_method("receber_dano"):
 		inimigo.receber_dano(dano)
+	
+	if has_node("SomAtaque"):
+		$SomAtaque.pitch_scale = randf_range(0.95, 1.05)
+		$SomAtaque.play()
