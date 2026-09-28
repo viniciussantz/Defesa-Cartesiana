@@ -6,6 +6,8 @@ const CENA_ATALAIA = preload("res://scenes/torres/atalaia.tscn")
 @export var alcance_grid: int = 15 # Gera marcadores de -10 até +10
 
 @onready var chao_grid: MeshInstance3D = $ChaoGrid
+@onready var trilha_construcao: AudioStreamPlayer = get_node_or_null("TrilhaConstrucao")
+@onready var trilha_horda: AudioStreamPlayer = get_node_or_null("TrilhaHorda")
 
 var container_marcadores: Node3D
 var grid_visivel: bool = true
@@ -13,6 +15,14 @@ var grid_visivel: bool = true
 func _ready() -> void:
 	$CanvasLayer/BotaoConstruir.pressed.connect(_on_botao_construir_pressed)
 	gerar_marcadores_cartesiano()
+	
+	if trilha_construcao:
+		trilha_construcao.volume_db = -10.0
+		trilha_construcao.play()
+
+	if trilha_horda:
+		trilha_horda.volume_db = -80.0 # Começa muda
+		trilha_horda.play()
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -80,3 +90,27 @@ func grade_para_mundo(x: int, z: int) -> Vector3:
 	# Converte coordenada de grade (x, z) em posição real no mundo 3D.
 	# Y fica fixo em 0 porque as torres ficam sempre no chão.
 	return Vector3(x * tamanho_celula, 0.0, z * tamanho_celula)
+	
+func tocar_musica_horda() -> void:
+	if trilha_construcao == null or trilha_horda == null:
+		return
+
+	# Cria uma transição suave de 1.5 segundos entre as trilhas
+	var tween: Tween = create_tween().set_parallel(true)
+	
+	# Baixa a música de construção para silêncio
+	tween.tween_property(trilha_construcao, "volume_db", -80.0, 1.5)
+	
+	# Sobe a música da horda para o volume normal
+	tween.tween_property(trilha_horda, "volume_db", -10.0, 1.5)
+
+
+# Função para chamar quando a onda de inimigos terminar
+func tocar_musica_construcao() -> void:
+	if trilha_construcao == null or trilha_horda == null:
+		return
+
+	var tween: Tween = create_tween().set_parallel(true)
+	
+	tween.tween_property(trilha_construcao, "volume_db", 0.0, 1.5)
+	tween.tween_property(trilha_horda, "volume_db", -80.0, 1.5)

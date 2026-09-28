@@ -16,6 +16,10 @@ func iniciar_horda() -> void:
 		return  # trava pra não spawnar de novo se chamarem 2x
 	_ja_iniciou = true
 	
+	var main = get_parent()
+	if main and main.has_method("tocar_musica_horda"):
+		main.tocar_musica_horda()
+	
 	for i in qtd_inimigos:
 		_spawnar_inimigo()
 		await get_tree().create_timer(intervalo_spawn).timeout

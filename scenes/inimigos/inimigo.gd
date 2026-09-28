@@ -52,5 +52,25 @@ func _physics_process(delta: float) -> void:
 
 func receber_dano(quantidade: int) -> void:
 	vida_atual -= quantidade
+	
+	if has_node("SomDano"):
+		# Variação leve de tom para o som não ficar repetitivo (0.9 a 1.1)
+		$SomDano.pitch_scale = randf_range(0.9, 1.1)
+		$SomDano.play()
+		
 	if vida_atual <= 0:
-		queue_free()
+		_morrer()
+		
+func _morrer() -> void:
+	# Esconde a malha visual e desativa a movimentação/colisão
+	visible = false
+	set_physics_process(false)
+	
+	if has_node("CollisionShape3D"):
+		$CollisionShape3D.disabled = true
+
+	# Espera o som de dano/morte terminar de tocar antes de deletar o nó
+	if has_node("SomDano") and $SomDano.playing:
+		await $SomDano.finished
+
+	queue_free()
