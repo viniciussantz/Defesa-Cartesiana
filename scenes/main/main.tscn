@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgmxjggk8ncoa" path="res://scenes/main/main.gd" id="1_hyk8p"]
 [ext_resource type="PackedScene" uid="uid://b2rjrfk1is6ig" path="res://scenes/inimigos/inimigo.tscn" id="2_iuonh"]
-[ext_resource type="Shader" uid="uid://l7quo08foqun" path="res://shaders/grid_cartesiano.gdshader" id="2_l3cfh"]
+[ext_resource type="Script" uid="uid://cjanrwfadm3nx" path="res://scenes/main/chao_grid.gd" id="3_b1x3f"]
 [ext_resource type="Script" uid="uid://c7iyf62paqy0p" path="res://scripts/camera_rts.gd" id="3_k2fmo"]
 [ext_resource type="Script" uid="uid://csfmecj7r7gnn" path="res://scenes/main/path_3d.gd" id="5_6q06x"]
 [ext_resource type="Script" uid="uid://b7mohkv0yubvs" path="res://scenes/main/node_3d.gd" id="6_ow5a4"]
@@ -12,9 +12,53 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
 size = Vector2(62, 62)
 
+[sub_resource type="Shader" id="Shader_yyfjg"]
+code = "shader_type spatial;
+render_mode unshaded, cull_disabled;
+
+uniform bool exibir_grid = true; // Controla se o grid desenha linhas ou apenas a cor de fundo
+uniform float tamanho_celula = 2.0;
+uniform vec4 cor_fundo : source_color = vec4(0.18, 0.24, 0.15, 1.0);  
+uniform vec4 cor_grade : source_color = vec4(0.7, 0.7, 0.7, 0.3);   
+uniform vec4 cor_eixo_x : source_color = vec4(0.9, 0.2, 0.2, 1.0);  
+uniform vec4 cor_eixo_z : source_color = vec4(0.2, 0.6, 0.9, 1.0);  
+
+varying vec3 pos_mundo;
+
+void vertex() {
+	pos_mundo = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+}
+
+void fragment() {
+	if (!exibir_grid) {
+		ALBEDO = cor_fundo.rgb;
+	} else {
+		vec2 coord = pos_mundo.xz / tamanho_celula;
+		vec2 grid_pos = abs(fract(coord - 0.5) - 0.5);
+		vec2 delta = fwidth(coord);
+		
+		vec2 line = smoothstep(vec2(0.5) - delta, vec2(0.5), grid_pos);
+		float eh_linha = max(line.x, line.y);
+
+		float largura_eixo = 0.1;
+		bool eixo_x = abs(pos_mundo.z) < largura_eixo;
+		bool eixo_z = abs(pos_mundo.x) < largura_eixo;
+
+		vec4 cor_final = mix(cor_fundo, cor_grade, eh_linha);
+
+		if (eixo_x) {
+			cor_final = cor_eixo_x;
+		} else if (eixo_z) {
+			cor_final = cor_eixo_z;
+		}
+
+		ALBEDO = cor_final.rgb;
+	}
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l3cfh"]
 render_priority = 0
-shader = ExtResource("2_l3cfh")
+shader = SubResource("Shader_yyfjg")
 shader_parameter/exibir_grid = true
 shader_parameter/tamanho_celula = 2.0
 shader_parameter/cor_fundo = Color(0.18, 0.24, 0.15, 1)
@@ -22,12 +66,10 @@ shader_parameter/cor_grade = Color(0.7, 0.7, 0.7, 0.3)
 shader_parameter/cor_eixo_x = Color(0.9, 0.2, 0.2, 1)
 shader_parameter/cor_eixo_z = Color(0.2, 0.6, 0.9, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
-size = Vector3(60, 0.1, 60)
-
 [sub_resource type="Curve3D" id="Curve3D_ow5a4"]
 
 [node name="Main" type="Node3D" unique_id=725019499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52223396, 0)
 script = ExtResource("1_hyk8p")
 
 [node name="Sol" type="DirectionalLight3D" parent="." unique_id=859875625]
@@ -59,12 +101,7 @@ text = "Posicionar"
 [node name="ChaoGrid" type="MeshInstance3D" parent="." unique_id=472142663]
 mesh = SubResource("PlaneMesh_g4v7s")
 surface_material_override/0 = SubResource("ShaderMaterial_l3cfh")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="ChaoGrid" unique_id=1476428418]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ChaoGrid/StaticBody3D" unique_id=1510812623]
-shape = SubResource("BoxShape3D_g4v7s")
-debug_color = Color(0.46030444, 0.5936639, 0, 0.41960785)
+script = ExtResource("3_b1x3f")
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1030766222]
 script = ExtResource("3_k2fmo")
