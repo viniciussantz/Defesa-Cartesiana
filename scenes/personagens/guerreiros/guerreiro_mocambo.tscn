@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cvmcvlqytlphh"]
+
+[ext_resource type="Script" uid="uid://jd1av34fntet" path="res://scenes/personagens/guerreiros/guerreiro_mocambo.gd" id="1_h0hqw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
+albedo_color = Color(0, 0.4745098, 0.45882353, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
+material = SubResource("StandardMaterial3D_yf5fn")
+
+[node name="GuerreiroMocambo" type="CharacterBody3D" unique_id=168832477]
+script = ExtResource("1_h0hqw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=477947231]
+mesh = SubResource("CapsuleMesh_g4v7s")

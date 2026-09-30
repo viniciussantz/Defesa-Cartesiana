@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bod2ybsaietqj"]
 
 [ext_resource type="Script" uid="uid://bgmxjggk8ncoa" path="res://scenes/main/main.gd" id="1_hyk8p"]
-[ext_resource type="PackedScene" uid="uid://b2rjrfk1is6ig" path="res://scenes/inimigos/inimigo.tscn" id="2_iuonh"]
+[ext_resource type="PackedScene" uid="uid://b2rjrfk1is6ig" path="res://scenes/personagens/inimigos/inimigo.tscn" id="2_iuonh"]
 [ext_resource type="Shader" uid="uid://l7quo08foqun" path="res://shaders/grid_cartesiano.gdshader" id="2_l3cfh"]
 [ext_resource type="Script" uid="uid://c7iyf62paqy0p" path="res://scripts/camera_rts.gd" id="3_k2fmo"]
 [ext_resource type="Script" uid="uid://csfmecj7r7gnn" path="res://scenes/main/path_3d.gd" id="5_6q06x"]
@@ -10,13 +10,13 @@
 [ext_resource type="AudioStream" uid="uid://brjemo5d3o6ia" path="res://assets/audio/musica/ritual-norm_0.ogg" id="8_b1x3f"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
-size = Vector2(62, 62)
+size = Vector2(105, 255)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l3cfh"]
 render_priority = 0
 shader = ExtResource("2_l3cfh")
 shader_parameter/exibir_grid = true
-shader_parameter/tamanho_celula = 2.0
+shader_parameter/tamanho_celula = 15.0
 shader_parameter/cor_fundo = Color(0.18, 0.24, 0.15, 1)
 shader_parameter/cor_grade = Color(0.7, 0.7, 0.7, 0.3)
 shader_parameter/cor_eixo_x = Color(0.9, 0.2, 0.2, 1)
@@ -27,11 +27,23 @@ size = Vector3(60, 0.1, 60)
 
 [sub_resource type="Curve3D" id="Curve3D_ow5a4"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_57qmd"]
+
+[sub_resource type="Sky" id="Sky_yf5fn"]
+sky_material = SubResource("ProceduralSkyMaterial_57qmd")
+
+[sub_resource type="Environment" id="Environment_g4v7s"]
+background_mode = 1
+background_color = Color(0.41960785, 0.6431373, 0.9098039, 1)
+sky = SubResource("Sky_yf5fn")
+ambient_light_color = Color(0.41960785, 0.6431373, 0.9098039, 1)
+
 [node name="Main" type="Node3D" unique_id=725019499]
 script = ExtResource("1_hyk8p")
 
 [node name="Sol" type="DirectionalLight3D" parent="." unique_id=859875625]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0, 0, 0)
+shadow_enabled = true
 
 [node name="Torres" type="Node3D" parent="." unique_id=1621792077]
 
@@ -49,12 +61,17 @@ offset_top = 20.0
 offset_right = 240.0
 offset_bottom = 60.0
 
-[node name="BotaoConstruir" type="Button" parent="CanvasLayer" unique_id=47272015]
-offset_left = 260.0
-offset_top = 20.0
-offset_right = 420.0
-offset_bottom = 60.0
-text = "Posicionar"
+[node name="MenuTorres" type="HBoxContainer" parent="CanvasLayer" unique_id=1764944493]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BtnAtalaia" type="Button" parent="CanvasLayer/MenuTorres" unique_id=1119085963]
+layout_mode = 2
+text = "Atalaia"
+
+[node name="BtnMocambo" type="Button" parent="CanvasLayer/MenuTorres" unique_id=620905175]
+layout_mode = 2
+text = "Mocambo"
 
 [node name="ChaoGrid" type="MeshInstance3D" parent="." unique_id=472142663]
 mesh = SubResource("PlaneMesh_g4v7s")
@@ -87,3 +104,6 @@ stream = ExtResource("7_yyfjg")
 
 [node name="TrilhaHorda" type="AudioStreamPlayer" parent="." unique_id=933615036]
 stream = ExtResource("8_b1x3f")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1130275328]
+environment = SubResource("Environment_g4v7s")
