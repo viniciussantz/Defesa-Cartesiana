@@ -5,10 +5,11 @@
 [ext_resource type="AudioStream" uid="uid://ipsfixqif42o" path="res://assets/audio/sfx/torres/atalaia/708223__mythmazter__arrow_hit_1.wav" id="3_c3kng"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g4v7s"]
-height = 5.0
-radius = 5.0
+height = 8.0
+radius = 20.0
 
 [node name="Atalaia" type="Node3D" unique_id=1693772500]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 0, 0, 0)
 script = ExtResource("1_ip46u")
 
 [node name="Area3D" type="Area3D" parent="." unique_id=1822953219]
