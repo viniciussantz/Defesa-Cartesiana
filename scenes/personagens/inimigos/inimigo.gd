@@ -1,9 +1,9 @@
 extends CharacterBody3D
 
-@export var vida_maxima: int = 30
+@export var vida_maxima: int = 40
 var vida_atual: int
 
-@export var velocidade: float = 3.0
+@export var velocidade: float = 15.0
 
 var caminho: Array = []
 var indice_caminho_atual: int = 1

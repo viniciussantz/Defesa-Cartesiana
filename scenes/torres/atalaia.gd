@@ -3,6 +3,8 @@ extends Node3D
 @export var intervalo_ataque: float = 1.0
 @export var dano: int = 10
 
+const CENA_FLECHA = preload("res://scenes/torres/flecha.tscn")
+
 var inimigos_no_alcance: Array = []
 
 
@@ -36,7 +38,9 @@ func _on_timer_timeout() -> void:
 
 func atacar(inimigo: Node3D) -> void:
 	if inimigo.has_method("receber_dano"):
-		inimigo.receber_dano(dano)
+		var flecha = CENA_FLECHA.instantiate()
+		get_tree().current_scene.add_child(flecha)
+		flecha.iniciar(global_position + Vector3(0, 1.5, 0), inimigo, dano)
 	
 	if has_node("SomAtaque"):
 		$SomAtaque.pitch_scale = randf_range(0.95, 1.05)
