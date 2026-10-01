@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bobb472srwlau"
-path.s3tc="res://.godot/imported/Mocambo_ThatchedRoof001B_1K-JPG_Color.jpg-9c177afa31b8a1f594194a809f2768e2.s3tc.ctex"
+uid="uid://lud43tuouf85"
+path.s3tc="res://.godot/imported/Atalaia_2.png-9d4681c189c76f79b7dfe10e7333a79e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "ab149d92de4becd4a03795160d35dde9"
+"md5": "07b007a8e4a9fdb7320c093e9b04e4fe"
 }
 
 [deps]
 
-source_file="res://assets/models/torres/Mocambo_ThatchedRoof001B_1K-JPG_Color.jpg"
-dest_files=["res://.godot/imported/Mocambo_ThatchedRoof001B_1K-JPG_Color.jpg-9c177afa31b8a1f594194a809f2768e2.s3tc.ctex"]
+source_file="res://assets/models/torres/Atalaia/Atalaia_2.png"
+dest_files=["res://.godot/imported/Atalaia_2.png-9d4681c189c76f79b7dfe10e7333a79e.s3tc.ctex"]
 
 [params]
 

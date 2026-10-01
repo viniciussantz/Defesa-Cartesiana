@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqca0vlbv0f0a"
-path.s3tc="res://.godot/imported/Atalaia_1.png-a863d90d8254fd9518c4e4d1abe38f01.s3tc.ctex"
+uid="uid://b8aew7wc7d8m"
+path.s3tc="res://.godot/imported/Maloca_Wood062_1K-JPG_Color.jpg-c0d58e1d6535869634da1e7e22912723.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "a0cb112fe69a4df8ec669922ff337b7e"
+"md5": "e4b53fcbd95c5c97bac25c9cf66fc664"
 }
 
 [deps]
 
-source_file="res://assets/models/torres/Atalaia_1.png"
-dest_files=["res://.godot/imported/Atalaia_1.png-a863d90d8254fd9518c4e4d1abe38f01.s3tc.ctex"]
+source_file="res://assets/models/torres/Maloca/Maloca_Wood062_1K-JPG_Color.jpg"
+dest_files=["res://.godot/imported/Maloca_Wood062_1K-JPG_Color.jpg-c0d58e1d6535869634da1e7e22912723.s3tc.ctex"]
 
 [params]
 
