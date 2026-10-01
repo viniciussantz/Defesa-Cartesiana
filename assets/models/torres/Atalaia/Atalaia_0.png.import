@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwboxey86h6n4"
-path.s3tc="res://.godot/imported/Mocambo_Wood062_1K-JPG_Color.jpg-d03c3530982eaa6dcd085a647890d579.s3tc.ctex"
+uid="uid://cqkw3bkakexmv"
+path.s3tc="res://.godot/imported/Atalaia_0.png-dd9d91fb26e43feb01ff3d41044c760b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "e4b53fcbd95c5c97bac25c9cf66fc664"
+"md5": "baceeb4cabdfc6460df01b1cba160de4"
 }
 
 [deps]
 
-source_file="res://assets/models/torres/Mocambo_Wood062_1K-JPG_Color.jpg"
-dest_files=["res://.godot/imported/Mocambo_Wood062_1K-JPG_Color.jpg-d03c3530982eaa6dcd085a647890d579.s3tc.ctex"]
+source_file="res://assets/models/torres/Atalaia/Atalaia_0.png"
+dest_files=["res://.godot/imported/Atalaia_0.png-dd9d91fb26e43feb01ff3d41044c760b.s3tc.ctex"]
 
 [params]
 

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lud43tuouf85"
-path.s3tc="res://.godot/imported/Atalaia_2.png-48e9ccf93f9c8a8c81c76c03a43ce967.s3tc.ctex"
+uid="uid://csqgyjcfptfmq"
+path.s3tc="res://.godot/imported/Maloca_Bark003_1K-JPG_Color.jpg-2773e4b4cf6f34bad8417191e5d5abfd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "07b007a8e4a9fdb7320c093e9b04e4fe"
+"md5": "56fb539967d3efba8dc6efdc24c35ff4"
 }
 
 [deps]
 
-source_file="res://assets/models/torres/Atalaia_2.png"
-dest_files=["res://.godot/imported/Atalaia_2.png-48e9ccf93f9c8a8c81c76c03a43ce967.s3tc.ctex"]
+source_file="res://assets/models/torres/Maloca/Maloca_Bark003_1K-JPG_Color.jpg"
+dest_files=["res://.godot/imported/Maloca_Bark003_1K-JPG_Color.jpg-2773e4b4cf6f34bad8417191e5d5abfd.s3tc.ctex"]
 
 [params]
 

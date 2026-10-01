@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bhiklwkiplhwp"
-path="res://.godot/imported/Mocambo.glb-c93d052c563299b067341414e3d26e78.scn"
+uid="uid://cbxcx4m4fgamf"
+path="res://.godot/imported/Atalaia.gltf-401180b4a5909e9f01e394555e0f7535.scn"
 
 [deps]
 
-source_file="res://assets/models/torres/Mocambo.glb"
-dest_files=["res://.godot/imported/Mocambo.glb-c93d052c563299b067341414e3d26e78.scn"]
+source_file="res://assets/models/torres/Atalaia/Atalaia.gltf"
+dest_files=["res://.godot/imported/Atalaia.gltf-401180b4a5909e9f01e394555e0f7535.scn"]
 
 [params]
 
