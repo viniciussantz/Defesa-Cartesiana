@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://wusa7i6umaai"]
 
 [ext_resource type="Script" uid="uid://bc5gqljx8hupv" path="res://scenes/torres/mocambo.gd" id="2_6a85s"]
-[ext_resource type="Texture2D" uid="uid://bj53puf1guy65" path="res://assets/models/torres/Mocambo_Bark003_1K-JPG_Color.jpg" id="2_17l7b"]
+[ext_resource type="Texture2D" uid="uid://bj53puf1guy65" path="res://assets/models/torres/Mocambo/Mocambo_Bark003_1K-JPG_Color.jpg" id="2_17l7b"]
 [ext_resource type="PackedScene" uid="uid://cvmcvlqytlphh" path="res://scenes/personagens/guerreiros/guerreiro_mocambo.tscn" id="3_d8aa4"]
-[ext_resource type="Texture2D" uid="uid://dwboxey86h6n4" path="res://assets/models/torres/Mocambo_Wood062_1K-JPG_Color.jpg" id="3_v34tp"]
-[ext_resource type="Texture2D" uid="uid://bobb472srwlau" path="res://assets/models/torres/Mocambo_ThatchedRoof001B_1K-JPG_Color.jpg" id="4_qdk8l"]
+[ext_resource type="Texture2D" uid="uid://dwboxey86h6n4" path="res://assets/models/torres/Mocambo/Mocambo_Wood062_1K-JPG_Color.jpg" id="3_v34tp"]
+[ext_resource type="Texture2D" uid="uid://bobb472srwlau" path="res://assets/models/torres/Mocambo/Mocambo_ThatchedRoof001B_1K-JPG_Color.jpg" id="4_qdk8l"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42yxd"]
 resource_name = "Material.001"
@@ -379,46 +379,46 @@ radius = 5.0
 script = ExtResource("2_6a85s")
 cena_guerreiro = ExtResource("3_d8aa4")
 
-[node name="Modelo" type="Node3D" parent="." unique_id=2134808791]
+[node name="Modelo3D" type="Node3D" parent="." unique_id=2134808791]
 transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 0, 0, 0)
 
-[node name="Cilindro" type="MeshInstance3D" parent="Modelo" unique_id=947803392]
+[node name="Cilindro" type="MeshInstance3D" parent="Modelo3D" unique_id=947803392]
 transform = Transform3D(13, 0, 0, 0, 3.73255, 0, 0, 0, 13, 0, 3.73255, 0)
 mesh = SubResource("ArrayMesh_17l7b")
 
-[node name="Cilindro_001" type="MeshInstance3D" parent="Modelo" unique_id=982689046]
+[node name="Cilindro_001" type="MeshInstance3D" parent="Modelo3D" unique_id=982689046]
 transform = Transform3D(0.3, 0, 0, 0, 3.2600002, 0, 0, 0, 0.3, 0, 3.25699, -13)
 mesh = SubResource("ArrayMesh_v34tp")
 
-[node name="Cilindro_002" type="MeshInstance3D" parent="Modelo" unique_id=291890113]
+[node name="Cilindro_002" type="MeshInstance3D" parent="Modelo3D" unique_id=291890113]
 transform = Transform3D(0.3, 0, 0, 0, 3.2600002, 0, 0, 0, 0.3, -13, 3.25699, 0)
 mesh = SubResource("ArrayMesh_qdk8l")
 
-[node name="Cilindro_003" type="MeshInstance3D" parent="Modelo" unique_id=1649703942]
+[node name="Cilindro_003" type="MeshInstance3D" parent="Modelo3D" unique_id=1649703942]
 transform = Transform3D(0.3, 0, 0, 0, 3.2600002, 0, 0, 0, 0.3, 0, 3.25699, 13)
 mesh = SubResource("ArrayMesh_artr6")
 
-[node name="Cilindro_004" type="MeshInstance3D" parent="Modelo" unique_id=756149051]
+[node name="Cilindro_004" type="MeshInstance3D" parent="Modelo3D" unique_id=756149051]
 transform = Transform3D(0.3, 0, 0, 0, 3.2600002, 0, 0, 0, 0.3, 9.257263, 3.25699, 9.025955)
 mesh = SubResource("ArrayMesh_12u8h")
 
-[node name="Cilindro_005" type="MeshInstance3D" parent="Modelo" unique_id=723560080]
+[node name="Cilindro_005" type="MeshInstance3D" parent="Modelo3D" unique_id=723560080]
 transform = Transform3D(0.3, 0, 0, 0, 3.2600002, 0, 0, 0, 0.3, -9.25726, 3.25699, -9.02596)
 mesh = SubResource("ArrayMesh_6jht3")
 
-[node name="Cilindro_006" type="MeshInstance3D" parent="Modelo" unique_id=1422127037]
+[node name="Cilindro_006" type="MeshInstance3D" parent="Modelo3D" unique_id=1422127037]
 transform = Transform3D(0.3, 0, 0, 0, 3.2600002, 0, 0, 0, 0.3, 9.257263, 3.25699, -9.02596)
 mesh = SubResource("ArrayMesh_ahbe2")
 
-[node name="Cilindro_007" type="MeshInstance3D" parent="Modelo" unique_id=1250099922]
+[node name="Cilindro_007" type="MeshInstance3D" parent="Modelo3D" unique_id=1250099922]
 transform = Transform3D(0.3, 0, 0, 0, 3.2600002, 0, 0, 0, 0.3, -9.25726, 3.25699, 9.02596)
 mesh = SubResource("ArrayMesh_tfe67")
 
-[node name="Cone" type="MeshInstance3D" parent="Modelo" unique_id=76468277]
+[node name="Cone" type="MeshInstance3D" parent="Modelo3D" unique_id=76468277]
 transform = Transform3D(16, 0, 0, 0, 8, 0, 0, 0, 16, 0, 17, 0)
 mesh = SubResource("ArrayMesh_awide")
 
-[node name="Plane" type="MeshInstance3D" parent="Modelo" unique_id=1539050860]
+[node name="Plane" type="MeshInstance3D" parent="Modelo3D" unique_id=1539050860]
 transform = Transform3D(0, 1, 0, -2.5, 0, 0, 0, 0, 4, 12.285704, 2.550788, 0.015734479)
 mesh = SubResource("ArrayMesh_a4kia")
 

@@ -1,21 +1,59 @@
+@tool
 extends Path3D
 
-const PONTOS := [
-	Vector2(15, 115),
-	Vector2(25, 85),
-	Vector2(18, 55),
-	Vector2(-10, 35),
-	Vector2(-30, 15),
-	Vector2(-25, -10),
-	Vector2(-35, -35),
-	Vector2(-15, -60),
-	Vector2(10, -75),
-	Vector2(20, -95),
-	Vector2(0, -115),
-]
+@export var no_maloca: Node3D:
+	set(valor):
+		no_maloca = valor
+		atualizar_caminho()
+
+@export var forcar_atualizacao: bool = false:
+	set(valor):
+		atualizar_caminho()
+
+@export_range(1.0, 25.0) var força_curva: float = 10.0:
+	set(valor):
+		força_curva = valor
+		atualizar_caminho()
+
 
 func _ready() -> void:
-	curve = Curve3D.new()
-	for p in PONTOS: 
-		curve.add_point(Vector3(p.x, 0.1, p.y))
-	
+	atualizar_caminho()
+
+
+func atualizar_caminho() -> void:
+	if not is_inside_tree() or not curve:
+		return
+
+	# Se a Maloca estiver configurada, garante que o último ponto esteja na posição dela
+	if is_instance_valid(no_maloca) and no_maloca.is_inside_tree():
+		var pos_local_maloca = to_local(no_maloca.global_position)
+		pos_local_maloca.y = 0.1
+		
+		# Atualiza a posição do último ponto para a Maloca
+		if curve.point_count > 0:
+			curve.set_point_position(curve.point_count - 1, pos_local_maloca)
+
+	# Suaviza as tangentes dos pontos que você editou manualmente no Viewport
+	var qtd_pontos = curve.point_count
+	for i in range(qtd_pontos):
+		var vetor_in = Vector3.ZERO
+		var vetor_out = Vector3.ZERO
+
+		if i > 0 and i < qtd_pontos - 1:
+			var pos_anterior = curve.get_point_position(i - 1)
+			var pos_proximo = curve.get_point_position(i + 1)
+
+			var direcao = (pos_proximo - pos_anterior).normalized() * força_curva
+			vetor_in = -direcao
+			vetor_out = direcao
+			
+		curve.set_point_in(i, vetor_in)
+		curve.set_point_out(i, vetor_out)
+
+	# Notifica o CSGPolygon3D para redesenhar a pista
+	for child in get_children():
+		if child is CSGPolygon3D:
+			child.use_collision = true
+			var caminho_atual = child.path_node
+			child.path_node = NodePath("")
+			child.path_node = caminho_atual

@@ -124,7 +124,7 @@ func construir_torre(cena_torre: PackedScene) -> void:
 	var nova_torre = cena_torre.instantiate()
 	nova_torre.position = posicao_mundo
 	nova_torre.rotation_degrees.y = rotacao_atual
-	$Torres.add_child(nova_torre, true)
+	$Estruturas/Torres.add_child(nova_torre, true)
 
 	if not primeira_torre_colocada:
 		primeira_torre_colocada = true
