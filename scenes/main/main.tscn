@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bod2ybsaietqj"]
 
 [ext_resource type="Script" uid="uid://bgmxjggk8ncoa" path="res://scenes/main/main.gd" id="1_hyk8p"]
+[ext_resource type="PackedScene" uid="uid://tuaihqwkqh3" path="res://scenes/torres/maloca.tscn" id="2_b1x3f"]
 [ext_resource type="PackedScene" uid="uid://b2rjrfk1is6ig" path="res://scenes/personagens/inimigos/inimigo.tscn" id="2_iuonh"]
 [ext_resource type="Shader" uid="uid://l7quo08foqun" path="res://shaders/grid_cartesiano.gdshader" id="2_l3cfh"]
 [ext_resource type="Script" uid="uid://c7iyf62paqy0p" path="res://scripts/camera_rts.gd" id="3_k2fmo"]
@@ -25,7 +26,13 @@ shader_parameter/cor_eixo_z = Color(0.2, 0.6, 0.9, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
 size = Vector3(105, 1, 257.96765)
 
-[sub_resource type="Curve3D" id="Curve3D_ow5a4"]
+[sub_resource type="Curve3D" id="Curve3D_b1x3f"]
+bake_interval = 0.5
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0.1, 127, -6.726728, 0, 7.3994007, 6.726728, 0, -7.3994007, 5.9325247, 0.1, 115, -8, 0, 6, 8, 0, -6, 27.092106, 0.1, 107.061905, 0.39968038, 0, 9.992009, -0.39968038, 0, -9.992009, 40, 0.1, 85, 7.071068, 0, 7.071068, -7.071068, 0, -7.071068, 18, 0.1, 55, 7.682213, 0, 6.401844, -7.682213, 0, -6.401844, -10, 0.1, 35, 3.1622777, 0, 9.486833, -3.1622777, 0, -9.486833, -30, 0.1, 15, 1.0595883, 0, 9.943706, -1.0595883, 0, -9.943706, -25, 0.1, -10, -4.310672, 0, 9.023198, 4.310672, 0, -9.023198, -35, 0.1, -31.922497, -9.084738, 0, 4.1794186, 9.084738, 0, -4.1794186, -7.779521, 0.1, -46.046303, -3.3908796, 0, 9.407547, 3.3908796, 0, -9.407547, 28.928417, 0.1, -61.332657, 5.864308, 0, 8.099993, -5.864308, 0, -8.099993, 4.4588337, 0.1, -80, 0, 0, 0, 0, 0, 0, 0, 0.1, -101.28963),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 13
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_57qmd"]
 
@@ -45,7 +52,12 @@ script = ExtResource("1_hyk8p")
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 9.558698, 0)
 shadow_enabled = true
 
-[node name="Torres" type="Node3D" parent="." unique_id=1621792077]
+[node name="Estruturas" type="Node3D" parent="." unique_id=1027752411]
+
+[node name="Torres" type="Node3D" parent="Estruturas" unique_id=1621792077]
+
+[node name="Maloca" parent="Estruturas" unique_id=680786394 instance=ExtResource("2_b1x3f")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -101.28963)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1191894665]
 
@@ -91,9 +103,25 @@ script = ExtResource("3_k2fmo")
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 15, 15)
 current = true
 
-[node name="Caminho" type="Path3D" parent="." unique_id=1551707060]
-curve = SubResource("Curve3D_ow5a4")
+[node name="Caminho" type="Path3D" parent="." unique_id=1551707060 node_paths=PackedStringArray("no_maloca")]
+curve = SubResource("Curve3D_b1x3f")
 script = ExtResource("5_6q06x")
+no_maloca = NodePath("../Estruturas/Maloca")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Caminho" unique_id=685676915]
+use_collision = true
+polygon = PackedVector2Array(-2.5, 0, -2.5, 0.05, 2.5, 0.05, 2.5, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
 
 [node name="Horda" type="Node3D" parent="." unique_id=1047319805 node_paths=PackedStringArray("path_do_caminho")]
 script = ExtResource("6_ow5a4")
