@@ -3,7 +3,7 @@ render_mode unshaded;
 
 uniform bool exibir_grid = true; // Controla se o grid desenha linhas ou apenas a cor de fundo
 uniform float tamanho_celula = 2.0;
-uniform vec4 cor_fundo : source_color = vec4(0.18, 0.24, 0.15, 1.0);  
+uniform vec4 cor_fundo : source_color = vec4(0.0, 0.0, 0.0, 0.0);  
 uniform vec4 cor_grade : source_color = vec4(0.7, 0.7, 0.7, 0.3);   
 uniform vec4 cor_eixo_x : source_color = vec4(0.9, 0.2, 0.2, 1.0);  
 uniform vec4 cor_eixo_z : source_color = vec4(0.2, 0.6, 0.9, 1.0);  
@@ -37,6 +37,7 @@ void fragment() {
 			cor_final = cor_eixo_z;
 		}
 
+		ALPHA = cor_fundo.a;
 		ALBEDO = cor_final.rgb;
 	}
 }
