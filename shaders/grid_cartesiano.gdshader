@@ -1,12 +1,12 @@
 shader_type spatial;
 render_mode unshaded;
 
-uniform bool exibir_grid = true; // Controla se o grid desenha linhas ou apenas a cor de fundo
+uniform bool exibir_grid = true;
 uniform float tamanho_celula = 2.0;
-uniform vec4 cor_fundo : source_color = vec4(0.0, 0.0, 0.0, 0.0);  
-uniform vec4 cor_grade : source_color = vec4(0.7, 0.7, 0.7, 0.3);   
-uniform vec4 cor_eixo_x : source_color = vec4(0.9, 0.2, 0.2, 1.0);  
-uniform vec4 cor_eixo_z : source_color = vec4(0.2, 0.6, 0.9, 1.0);  
+uniform vec4 cor_fundo : source_color = vec4(0.0, 0.0, 0.0, 0.0);
+uniform vec4 cor_grade : source_color = vec4(1.0, 1.0, 1.0, 0.6);
+uniform vec4 cor_eixo_x : source_color = vec4(0.902, 0.2, 0.2, 1.0);
+uniform vec4 cor_eixo_z : source_color = vec4(0.2, 0.6, 0.902, 1.0);
 
 varying vec3 pos_mundo;
 
@@ -17,11 +17,12 @@ void vertex() {
 void fragment() {
 	if (!exibir_grid) {
 		ALBEDO = cor_fundo.rgb;
+		ALPHA = cor_fundo.a;
 	} else {
 		vec2 coord = pos_mundo.xz / tamanho_celula;
 		vec2 grid_pos = abs(fract(coord - 0.5) - 0.5);
 		vec2 delta = fwidth(coord);
-		
+
 		vec2 line = smoothstep(vec2(0.5) - delta, vec2(0.5), grid_pos);
 		float eh_linha = max(line.x, line.y);
 
@@ -37,7 +38,7 @@ void fragment() {
 			cor_final = cor_eixo_z;
 		}
 
-		ALPHA = cor_fundo.a;
 		ALBEDO = cor_final.rgb;
+		ALPHA = cor_final.a;
 	}
 }

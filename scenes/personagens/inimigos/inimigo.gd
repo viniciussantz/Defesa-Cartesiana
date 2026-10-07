@@ -37,7 +37,6 @@ func _physics_process(delta: float) -> void:
 	velocity.x = direcao.x * velocidade
 	velocity.z = direcao.z * velocidade
 
-	# Gira o personagem para encarar a direção do movimento
 	if direcao.length() > 0.01:
 		var alvo_look: Vector3 = global_position + direcao
 		look_at(alvo_look, Vector3.UP)
