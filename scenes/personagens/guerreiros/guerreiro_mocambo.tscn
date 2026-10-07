@@ -8,8 +8,19 @@ albedo_color = Color(0, 0.4745098, 0.45882353, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g4v7s"]
 material = SubResource("StandardMaterial3D_yf5fn")
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_g4v7s"]
+radius = 3.0
+
 [node name="GuerreiroMocambo" type="CharacterBody3D" unique_id=168832477]
 script = ExtResource("1_h0hqw")
+velocidade_movimento = null
+dano = null
+intervalo_ataque = null
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=477947231]
 mesh = SubResource("CapsuleMesh_g4v7s")
+
+[node name="AreaAlcance" type="Area3D" parent="." unique_id=2079522328]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaAlcance" unique_id=839489623]
+shape = SubResource("SphereShape3D_g4v7s")
