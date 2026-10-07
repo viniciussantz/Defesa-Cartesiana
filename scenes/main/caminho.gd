@@ -56,11 +56,3 @@ func atualizar_caminho() -> void:
 			
 		curve.set_point_in(i, vetor_in)
 		curve.set_point_out(i, vetor_out)
-
-	# Notifica o CSGPolygon3D para redesenhar a pista
-	for child in get_children():
-		if child is CSGPolygon3D:
-			child.use_collision = true
-			var caminho_atual = child.path_node
-			child.path_node = NodePath("")
-			child.path_node = caminho_atual
