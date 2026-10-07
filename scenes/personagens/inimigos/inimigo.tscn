@@ -10,6 +10,7 @@
 script = ExtResource("1_k84cy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=178321152]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_g4v7s")
 
 [node name="blockbench_export" parent="." unique_id=1335046220 instance=ExtResource("2_d4qpj")]

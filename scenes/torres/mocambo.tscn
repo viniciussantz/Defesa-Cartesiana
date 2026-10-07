@@ -378,6 +378,7 @@ radius = 5.0
 [node name="Mocambo" type="Node3D" unique_id=183032906]
 script = ExtResource("2_6a85s")
 cena_guerreiro = ExtResource("3_d8aa4")
+variacao_rally = 3.0
 
 [node name="Modelo3D" type="Node3D" parent="." unique_id=2134808791]
 transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.1855694e-08, 0, 0, 0)

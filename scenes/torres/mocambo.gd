@@ -7,19 +7,24 @@ extends Node3D
 @export var distancia_rally: float = 12.0   # Distância da porta até o ponto de guarda
 @export var variacao_rally: float = 2.5     # Área de espalhamento dos guerreiros no ponto de guarda
 
+@export var caminho: Path3D
+
 var guerreiros_ativos: Array = []
 var ponto_rally: Vector3
 
 func _ready() -> void:
-	# Define o ponto de guarda padrão (3 unidades à frente no chão Y=0)
-	ponto_rally = global_position + (transform.basis.z * distancia_rally)
+	if caminho != null and caminho.curve != null and caminho.curve.point_count > 0:
+		var local = caminho.to_local(global_position)
+		var ponto_local = caminho.curve.get_closest_point(local)
+		ponto_rally = caminho.to_global(ponto_local)
+	else:
+		ponto_rally = global_position + (-transform.basis.z * distancia_rally)
 	ponto_rally.y = 0.0
 
 	$Timer.wait_time = intervalo_spawn
 	$Timer.timeout.connect(_on_timer_timeout)
 	$Timer.start()
-
-	# Gera o primeiro guerreiro assim que o Mocambo é construído
+	
 	_on_timer_timeout()
 
 
@@ -43,7 +48,7 @@ func gerar_guerreiro() -> void:
 	else:
 		novo_guerreiro.global_position = global_position
 		
-	novo_guerreiro.global_position.y = 0.0
+	novo_guerreiro.global_position.y += 1.0
 
 	# Aplica uma leve variação na posição final para os guerreiros não ficarem sobrepostos
 	var offset = Vector3(
@@ -57,3 +62,4 @@ func gerar_guerreiro() -> void:
 		novo_guerreiro.definir_ponto_rally(destino)
 
 	guerreiros_ativos.append(novo_guerreiro)
+	
