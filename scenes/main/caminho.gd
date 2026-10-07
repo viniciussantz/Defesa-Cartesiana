@@ -15,10 +15,8 @@ extends Path3D
 		força_curva = valor
 		atualizar_caminho()
 
-
 func _ready() -> void:
 	atualizar_caminho()
-
 
 func atualizar_caminho() -> void:
 	if not is_inside_tree() or not curve:
@@ -40,12 +38,21 @@ func atualizar_caminho() -> void:
 		var vetor_out = Vector3.ZERO
 
 		if i > 0 and i < qtd_pontos - 1:
+			var pos_atual = curve.get_point_position(i)
 			var pos_anterior = curve.get_point_position(i - 1)
 			var pos_proximo = curve.get_point_position(i + 1)
 
-			var direcao = (pos_proximo - pos_anterior).normalized() * força_curva
-			vetor_in = -direcao
-			vetor_out = direcao
+			var dist_anterior = pos_atual.distance_to(pos_anterior)
+			var dist_proximo = pos_atual.distance_to(pos_proximo)
+			
+			var direcao = (pos_proximo - pos_anterior).normalized()
+			
+			# Limita a tangente a no máximo 40% do menor segmento vizinho,
+			# para a curva nunca "estourar"/fazer laço em viradas fechadas
+			var forca_segura = min(força_curva, min(dist_anterior, dist_proximo) * 0.4)
+
+			vetor_in = -direcao * forca_segura
+			vetor_out = direcao * forca_segura
 			
 		curve.set_point_in(i, vetor_in)
 		curve.set_point_out(i, vetor_out)
