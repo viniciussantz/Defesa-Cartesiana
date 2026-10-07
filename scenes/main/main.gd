@@ -38,6 +38,11 @@ func _ready() -> void:
 	if trilha_horda:
 		trilha_horda.volume_db = -80.0 # Começa muda
 		trilha_horda.play()
+		
+	if chao_grid:
+		var mat = chao_grid.get_surface_override_material(0) as ShaderMaterial
+		if mat:
+			mat.set_shader_parameter("tamanho_celula", tamanho_celula)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -82,19 +87,21 @@ func gerar_marcadores_cartesiano() -> void:
 		var label_x = Label3D.new()
 		label_x.text = str(i)
 		label_x.pixel_size = 0.01
-		label_x.font_size = 48
+		label_x.font_size = 500
 		label_x.modulate = Color(1, 0.3, 0.3)
-		label_x.position = Vector3(i * tamanho_celula, 0.1, 0.5)
+		label_x.position = Vector3(i * tamanho_celula, 2.0, 0.5)
 		label_x.rotation_degrees.x = -90
+		label_x.no_depth_test = true
 		container_marcadores.add_child(label_x)
 
 		var label_z = Label3D.new()
 		label_z.text = str(i)
 		label_z.pixel_size = 0.01
-		label_z.font_size = 48
+		label_z.font_size = 500
 		label_z.modulate = Color(0.3, 0.7, 1)
-		label_z.position = Vector3(0.5, 0.1, i * tamanho_celula)
+		label_z.position = Vector3(0.5, 2.0, i * tamanho_celula)
 		label_z.rotation_degrees.x = -90
+		label_z.no_depth_test = true
 		container_marcadores.add_child(label_z)
 
 
