@@ -19,15 +19,15 @@ var rotacao_atual: float = 0.0 # Guarda a rotação em graus (0, 90, 180, 270)
 func _ready() -> void:
 	
 	# Conecta os dois botões de construção
-	if $CanvasLayer/MenuTorres.has_node("BtnAtalaia"):
-		$CanvasLayer/MenuTorres/BtnAtalaia.pressed.connect(_on_botao_atalaia_pressed)
-	if $CanvasLayer/MenuTorres.has_node("BtnMocambo"):
-		$CanvasLayer/MenuTorres/BtnMocambo.pressed.connect(_on_botao_mocambo_pressed)
+	#if $CanvasLayer/MenuTorres.has_node("BtnAtalaia"):
+		#$CanvasLayer/MenuTorres/BtnAtalaia.pressed.connect(_on_botao_atalaia_pressed)
+	#if $CanvasLayer/MenuTorres.has_node("BtnMocambo"):
+		#$CanvasLayer/MenuTorres/BtnMocambo.pressed.connect(_on_botao_mocambo_pressed)
 		
-	if $CanvasLayer.has_node("InputX"):
-		$CanvasLayer/InputX.text_submitted.connect(_on_input_x_submitted)
-	if $CanvasLayer.has_node("InputY"):
-		$CanvasLayer/InputY.text_submitted.connect(_on_input_y_submitted)
+	#if $CanvasLayer.has_node("InputX"):
+		#$CanvasLayer/InputX.text_submitted.connect(_on_input_x_submitted)
+	#if $CanvasLayer.has_node("InputY"):
+		#$CanvasLayer/InputY.text_submitted.connect(_on_input_y_submitted)
 
 	gerar_marcadores_cartesiano()
 
