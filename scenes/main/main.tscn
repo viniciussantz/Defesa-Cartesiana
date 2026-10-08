@@ -201,20 +201,6 @@ transform = Transform3D(-8.742278e-08, 0, -2, 0, 2, 0, 2, 0, -8.742278e-08, 0, 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1191894665]
 
-[node name="InputX" type="LineEdit" parent="CanvasLayer" unique_id=1718295294]
-visible = false
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 120.0
-offset_bottom = 60.0
-
-[node name="InputY" type="LineEdit" parent="CanvasLayer" unique_id=528456737]
-visible = false
-offset_left = 140.0
-offset_top = 20.0
-offset_right = 240.0
-offset_bottom = 60.0
-
 [node name="MenuTorres" type="HBoxContainer" parent="CanvasLayer" unique_id=1764944493]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -226,6 +212,13 @@ text = "Atalaia"
 [node name="BtnMocambo" type="Button" parent="CanvasLayer/MenuTorres" unique_id=620905175]
 layout_mode = 2
 text = "Mocambo"
+
+[node name="LabelMoedas" type="Label" parent="CanvasLayer" unique_id=981450641]
+offset_left = 991.0
+offset_top = 3.0
+offset_right = 1085.0
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 20
 
 [node name="ChaoGrid" type="MeshInstance3D" parent="." unique_id=472142663]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

@@ -24,6 +24,7 @@ const CENAS := {
 @onready var horda: Node = get_node("../Horda")
 @onready var btn_atalaia: Button = get_node("../CanvasLayer/MenuTorres/BtnAtalaia")
 @onready var btn_mocambo: Button = get_node("../CanvasLayer/MenuTorres/BtnMocambo")
+@onready var label_moedas: Label = get_node("../CanvasLayer/LabelMoedas")
 
 var selecionada: String = ""      # nome da torre escolhida ("" = nenhuma, sem modo de construção ativo)
 var fantasma: Node3D              # instância translúcida que acompanha o mouse
@@ -32,6 +33,10 @@ var ocupadas: Dictionary = {}     # células que já têm torre: {Vector2i: torr
 var horda_iniciada: bool = false  # garante que a horda só começa uma vez
 var material_fantasma: StandardMaterial3D = StandardMaterial3D.new()  # material compartilhado que tinge o fantasma
 
+const CUSTOS := {
+	"atalaia": 50,
+	"mocambo": 80,
+}
 
 # Roda uma vez quando o nó entra na cena.
 # Configura o material translúcido do fantasma e liga os botões do menu às seleções.
@@ -45,8 +50,15 @@ func _ready() -> void:
 	# assim uma única função atende os dois botões.
 	btn_atalaia.pressed.connect(_selecionar.bind("atalaia"))
 	btn_mocambo.pressed.connect(_selecionar.bind("mocambo"))
+	
+	btn_atalaia.text = "Atalaia (%d)" % CUSTOS["atalaia"]
+	btn_mocambo.text = "Mocambo (%d)" % CUSTOS["mocambo"]
+	Economia.moedas_mudaram.connect(_atualizar_moedas)
+	_atualizar_moedas(Economia.moedas)
 
-
+func _atualizar_moedas(total: int) -> void:
+	label_moedas.text = "Moedas: %d" % total
+	
 # Roda a cada frame. Enquanto há um fantasma, move ele pra célula sob o mouse
 # e atualiza a cor conforme o local seja válido ou não.
 func _process(_delta: float) -> void:
@@ -135,6 +147,9 @@ func _construir(c: Vector2i) -> void:
 	# Revalida no momento do clique: o estado pode ter mudado desde o último frame.
 	if not _pode_construir(c, pos):
 		return
+		
+	var custo: int = CUSTOS[selecionada]
+	Economia.gastar(custo)
 
 	var cena: PackedScene = CENAS[selecionada]
 	var torre: Node3D = cena.instantiate()
@@ -163,6 +178,10 @@ func _construir(c: Vector2i) -> void:
 # Decide se uma torre pode ser construída na célula.
 # Três regras: dentro do mapa, célula livre e longe da estrada dos inimigos.
 func _pode_construir(c: Vector2i, pos: Vector3) -> bool:
+	var custo: int = CUSTOS[selecionada]
+	if Economia.moedas < custo:
+		return false
+	
 	if absf(pos.x) > limite_mapa.x or absf(pos.z) > limite_mapa.y:
 		return false
 	if ocupadas.has(c):

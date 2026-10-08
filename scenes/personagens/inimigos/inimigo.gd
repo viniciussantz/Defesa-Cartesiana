@@ -5,6 +5,9 @@ var vida_atual: int
 
 @export var velocidade: float = 15.0
 
+@export var recompensa: int = 10
+var morto: bool = false
+
 # Bloqueio por guerreiros
 @export var alcance_bloqueio: float = 3.0
 @export var dano_ataque: int = 5
@@ -92,7 +95,13 @@ func _encarar(alvo: Node3D) -> void:
 
 
 func receber_dano(quantidade: int) -> void:
+	if morto:
+		return
 	vida_atual -= quantidade
+	if vida_atual <= 0:
+		morto = true
+		Economia.ganhar(recompensa)
+		queue_free()
 
 	if has_node("SomDano"):
 		# Variação leve de tom para o som não ficar repetitivo (0.9 a 1.1)
